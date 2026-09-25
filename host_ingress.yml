@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress2
+  namespace: ingress
+spec:
+  ingressClassName: nginx
+
+  rules:
+  - host: makeup.beauty.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: makeup-svc
+            port:
+              number: 80
+
+  - host: shoes.beauty.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: shoes-svc
+            port:
+              number: 80
