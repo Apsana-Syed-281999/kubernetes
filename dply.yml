@@ -1,0 +1,111 @@
+#Deployment for makeup
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: makeup
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: makeup
+  template:
+    metadata:
+      name: template1
+      labels:
+        app: makeup
+    spec:
+      containers:
+        - name: con-1
+          image: apsanadevops/beauty:makeup
+          ports:
+            - containerPort: 80
+
+# Deployment for shoes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoes
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shoes
+  template:
+    metadata:
+      name: template1
+      labels:
+        app: shoes
+    spec:
+      containers:
+        - name: con-1
+          image: apsanadevops/beauty:shoes
+          ports:
+            - containerPort: 80
+
+# Deployment for error
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: other
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: other
+  template:
+    metadata:
+      name: template1
+      labels:
+        app: other
+    spec:
+      containers:
+        - name: con-1
+          image: apsanadevops/beauty:error
+          ports:
+            - containerPort: 80
+
+#svc for makeup deploy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: makeup-svc
+spec:
+  selector:
+    app: makeup
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+
+#svc for makeup deploy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoes-svc
+spec:
+  selector:
+    app: shoes
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+
+#svc for makeup deploy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: error-svc
+spec:
+  selector:
+    app: other
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+            
