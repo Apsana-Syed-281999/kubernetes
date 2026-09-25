@@ -21,7 +21,7 @@ spec:
                 port:
                   number: 80
 
-          - path: /shoes(/\$)(.*)
+          - path: /shoes(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
